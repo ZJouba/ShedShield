@@ -1,1 +1,0 @@
-Learning PyQt5
