@@ -55,7 +55,7 @@ b. Complete your details
 c. Use the provided API key when setting up Shed Shield
 
 ### 2. Shed Shield
-When running Shed Shield for the first time, you first have to setup your API Key and then your zones.
+When running Shed Shield for the first time, you first have to setup your API Key and then your zones.  
 a. Run Shed Shield  
 <img src='.github/assets/step3.png' alt='Shed Shield' width=500>  
 b. Follow the instructions and go to the Settings tab  
