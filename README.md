@@ -1,35 +1,90 @@
-## Electron + TypeScript + React
+<h1 align='center'>
+  <br>
+  <img src='./assets/icon.png' alt='Shed Shield' width=200>
+  <br>
+  Shed Shield
+  <br>
+</h1>
 
-Boilerplate for a project using Electron, React and Typescript.
+<h4 align='center'>A handy little utility to shutdown your PC before loadingshedding hits. Built with <a href="https://www.electronjs.org/" target="_blank">Electron</a>.</h4>
 
-## Installation
+<div align='center'>
+<a href='https://github.com/zjouba/shedshield/releases'>
+  
+<img src='https://img.shields.io/github/v/release/zjouba/shedshield?color=%23FDD835&label=version&style=for-the-badge'>
+  
+</a>
 
-Use a package manager of your choice (npm, yarn, etc.) in order to install all dependencies
+<a href='https://github.com/zjouba/shedshield/blob/master/LICENSE'>
+  
+<img src='https://img.shields.io/github/license/zjouba/shedshield?style=for-the-badge'>
+  
+</a>
+</div>
+<br />
 
-```bash
-yarn
-```
+---
 
-## Usage
+<div align='center'>
 
-Just run `start` script.
+**[SHED SHIELD](#🛡️shed-shield) • 
+[KEY FEATURES](#🔧-key-features) • 
+[FIRST TIME SETUP](#⌨️-first-time-setup) • 
+[DOWNLOAD](#💾-download) • 
+[CONTRIBUTING](#🦾-contributing) • 
+[SUPPORT](#🙏support) • 
+[LICENSE](#📜-license)**
 
-```bash
-yarn start
-```
+</div>
 
-## Packaging
+# 🛡️Shed Shield
+Shed Shield uses the [EskomSePush](https://documenter.getpostman.com/view/1296288/UzQuNk3E#intro) API along with [Nominatum](https://nominatim.openstreetmap.org/ui/about.html) to look up your zone and adds a cron job to shutdown your PC before loadshedding cuts the power.
 
-To generate the project package based on the OS you're running on, just run:
+# 🔧 Key Features
+* Shed Shield uses geolocation to find your closest zone
+* Shed Shield can monitor multiple zones
+* Shed Shield uses the most immediate loadshedding timeslot to schedule a shutdown
+* Shed Shield can be configured to shutdown at specified intervals before loadshedding
 
-```bash
-yarn package
-```
+# ⌨️ First time setup
+### 1. EskomSePush API  
+a. Before running Shed Shield, navigate to [EskomSePush API Subscription](https://eskomsepush.gumroad.com/l/api) and subscribe to the free tier  
+<img src='.github/assets/step1.png' alt='Shed Shield' width=500>  
+b. Complete your details  
+<img src='.github/assets/step2.png' alt='Shed Shield' width=500>  
+c. Use the provided API key when setting up Shed Shield
 
-## Contributing
+### 2. Shed Shield
+When running Shed Shield for the first time, you first have to setup your API Key and then your zones.
+a. Run Shed Shield  
+<img src='.github/assets/step3.png' alt='Shed Shield' width=500>  
+b. Follow the instructions and go to the Settings tab  
+<img src='.github/assets/step4.png' alt='Shed Shield' width=500>  
+c. Enter the API Key from [Step 1](#1-eskomsepush-api) into the input field  
+d. Click the Save Settings button   
+e. Search for your street address or nearest location using the Address lookup  
+<img src='.github/assets/step5.png' alt='Shed Shield' width=500>  
+f. Click SEARCH FOR YOUR ZONE to search for your closest Zone  
+<b>NB! Don't search for too many zones, this request uses 5 units of your API quota with EskomSePush!</b>  
+g. Select the zones you want to monitor, the interval and be sure to check Launch at startup to have worry free shutdowns  
+<img src='.github/assets/step6.png' alt='Shed Shield' width=500>  
+h. And that's all there is too it  
+<img src='.github/assets/step7.png' alt='Shed Shield' width=500> 
 
-Pull requests are always welcome 😃.
+You can also see at what time the app will shutdown in the system tray  
+<img src='.github/assets/tray.png' alt='Shed Shield' width=200>   
 
-## License
+<h3>Be sure to keep the app running in order to schedule the shutdowns. It will minimize to the system tray</h2>
+<br>
 
-[MIT](https://choosealicense.com/licenses/mit/)
+# 💾 Download
+You can [download](https://github.com/zjouba/shedshield/releases/tag/latest) the Shed Shield installer for Windows. (macOS & Linux are WIP)
+
+# 🦾 Contributing
+Shed Shield is an open-source project. We appreciate the community's involvement and feedback. Please refer to our [contribution](https://github.com/zjouba/shedshield/blob/master/contributing.md) guide for more information.
+
+# 🙏Support
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B5NRT22)
+
+# 📜 License
+Shed Shield is free and open-source software licensed under the [GNU General Public License v3.0.](https://github.com/zjouba/shedshield/blob/master/license)
