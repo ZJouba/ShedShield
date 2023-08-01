@@ -27,13 +27,13 @@
 
 <div align='center'>
 
-**[SHED SHIELD](#🛡️shed-shield) • 
-[KEY FEATURES](#🔧-key-features) • 
-[FIRST TIME SETUP](#⌨️-first-time-setup) • 
-[DOWNLOAD](#💾-download) • 
-[CONTRIBUTING](#🦾-contributing) • 
-[SUPPORT](#🙏support) • 
-[LICENSE](#📜-license)**
+**[SHED SHIELD](https://github.com/ZJouba/ShedShield#%EF%B8%8Fshed-shield) • 
+[KEY FEATURES](https://github.com/ZJouba/ShedShield#-key-features) • 
+[FIRST TIME SETUP](https://github.com/ZJouba/ShedShield#%EF%B8%8F-first-time-setup) • 
+[DOWNLOAD](https://github.com/ZJouba/ShedShield#-download) • 
+[CONTRIBUTING](https://github.com/ZJouba/ShedShield#-contributing) • 
+[SUPPORT](https://github.com/ZJouba/ShedShield#support) • 
+[LICENSE](https://github.com/ZJouba/ShedShield#-license)**
 
 </div>
 
@@ -78,13 +78,13 @@ You can also see at what time the app will shutdown in the system tray
 <br>
 
 # 💾 Download
-You can [download](https://github.com/zjouba/shedshield/releases/tag/latest) the Shed Shield installer for Windows. (macOS & Linux are WIP)
+You can [download](https://github.com/ZJouba/ShedShield/releases) the Shed Shield installer for Windows. (macOS & Linux are WIP)
 
 # 🦾 Contributing
-Shed Shield is an open-source project. We appreciate the community's involvement and feedback. Please refer to our [contribution](https://github.com/zjouba/shedshield/blob/master/contributing.md) guide for more information.
+Shed Shield is an open-source project. We appreciate the community's involvement and feedback. Please refer to our [contribution](https://github.com/ZJouba/ShedShield/blob/master/CONTRIBUTING.md) guide for more information.
 
 # 🙏Support
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B5NRT22)
 
 # 📜 License
-Shed Shield is free and open-source software licensed under the [GNU General Public License v3.0.](https://github.com/zjouba/shedshield/blob/master/license)
+Shed Shield is free and open-source software licensed under the [GNU General Public License v3.0.](https://github.com/ZJouba/ShedShield/blob/master/LICENSE)
