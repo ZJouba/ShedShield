@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import IAreaComponent from '../interfaces/IAreaComponent';
 import IAreaInfo from '../interfaces/IAreaInfo';
-import { Chip, Grid, Skeleton, Stack, Typography } from '@mui/material';
-import dayjs, { Dayjs } from 'dayjs';
+import { Alert, Chip, Grid, Skeleton, Stack, Typography } from '@mui/material';
+import dayjs from 'dayjs';
 
 const AreaComponent: React.FC<IAreaComponent> = ({
   id,
@@ -10,6 +10,7 @@ const AreaComponent: React.FC<IAreaComponent> = ({
   handleNextEvent,
 }) => {
   const [areaInfo, setAreaInfo] = useState<IAreaInfo | null>(null);
+  const [areaInfoError, setAreaInfoError] = useState("");
   const [timeSlots, setTimeSlots] = useState<boolean[]>(
     new Array(48).fill(false),
   );
@@ -54,45 +55,51 @@ const AreaComponent: React.FC<IAreaComponent> = ({
         setTimeSlots(newSlots);        
       })
       .catch((error: Error) => {
+        setAreaInfo(null);
+        setAreaInfoError("Oops! Couldn't load area info. Please try again later")
         window.Main.error(error);
       });
   }, []);
 
   return (
     <Stack p={5} width="100%">
-      {areaInfo ? (
-        <>
-          <Grid container alignItems="center">
-            <Grid
-              item
-              sx={{ width: 'calc(100% - 44px)', wordWrap: 'break-word' }}
-            >
-              <Typography component="span" fontWeight="bold">
-                {areaInfo?.info?.name}
-              </Typography>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                width="fit-content"
+      {areaInfo ? 
+        areaInfoError ? 
+          (
+          <Alert severity="error">{areaInfoError}</Alert>
+          ) : (
+          <>
+            <Grid container alignItems="center">
+              <Grid
+                item
+                sx={{ width: 'calc(100% - 44px)', wordWrap: 'break-word' }}
               >
-                {areaInfo?.info?.region}
-              </Typography>
+                <Typography component="span" fontWeight="bold">
+                  {areaInfo?.info?.name}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  width="fit-content"
+                >
+                  {areaInfo?.info?.region}
+                </Typography>
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid container py={1}>
-            <Grid>
-              {timeSlots.map((slot, idx) => (
-                <Chip
-                  key={idx}
-                  sx={{ margin: '0 1px', width: '10px' }}
-                  color={slot ? 'error' : 'success'}
-                  size="small"
-                />
-              ))}
+            <Grid container py={1}>
+              <Grid>
+                {timeSlots.map((slot, idx) => (
+                  <Chip
+                    key={idx}
+                    sx={{ margin: '0 1px', width: '10px' }}
+                    color={slot ? 'error' : 'success'}
+                    size="small"
+                  />
+                ))}
+              </Grid>
             </Grid>
-          </Grid>
-        </>
-      ) : (
+          </>
+        ) : (
         <Skeleton animation="wave" variant="rounded" height={100} />
       )}
     </Stack>
