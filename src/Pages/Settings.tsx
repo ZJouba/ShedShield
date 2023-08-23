@@ -20,6 +20,7 @@ import {
   IconButton,
   Typography,
   Link as MUILink,
+  Alert,
 } from '@mui/material';
 import Grid2 from '@mui/material/Unstable_Grid2';
 import { useEffect, useState, useMemo, FC, ChangeEvent } from 'react';
@@ -61,6 +62,7 @@ const SettingsPage: FC<ISettingsPage> = ({ themeState, setThemeState }) => {
   const [loading, setLoading] = useState(false);
 
   const [areas, setAreas] = useState<string[]>([]);
+  const [areasError, setAreasError] = useState("");
 
   const [interval, setInterval] = useState(15);
 
@@ -100,9 +102,12 @@ const SettingsPage: FC<ISettingsPage> = ({ themeState, setThemeState }) => {
           area => !areas?.includes(area.id),
         );
         setAreaResults([...areaResults, ...newAreaResults]);
+        setAreasError("");
       })
       .catch((error: Error) => {
         window.Main.error(error);
+        setAreasError("Oops! Couldn't search for loadshedding areas. Please try again later");
+        setAreaResults([]);
       })
       .finally(() => setLoading(false));
   };
@@ -260,6 +265,7 @@ const SettingsPage: FC<ISettingsPage> = ({ themeState, setThemeState }) => {
                   </FormGroup>
                 )}
                 {areaResults.length <= 0 && loading && <CircularProgress />}
+                {areasError && <Alert severity="error">{areasError}</Alert>}
               </Box>
               <Box py={2}>
                 <FormControl>

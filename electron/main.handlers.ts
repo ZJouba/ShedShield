@@ -38,14 +38,10 @@ export const registerHandlers = (ipcMain: IpcMain, tray: Tray | null) => {
   });
 
   ipcMain.handle('searchArea', async (event: any, searchQuery: string) => {
-    try {
-      const response = await espAPI.searchArea(searchQuery);
-      const results = await response.json();
-      return results?.areas;
-    } catch (error) {
-      logger.error(error)
-      return [];
-    }
+    const response = await espAPI.searchArea(searchQuery);
+    if (response.status < 200 || response.status > 299) throw Error("Couldn't search for loadshedding areas");
+    const results = await response.json();
+    return results?.areas;
   });
 
   ipcMain.handle('geolocate', async (event: any, searchQuery: string) => {
