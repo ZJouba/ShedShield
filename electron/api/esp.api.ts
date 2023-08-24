@@ -13,7 +13,7 @@ const ESPToken = () => {
 };
 
 export const espAPI = {
-  searchArea: (searchQuery: string): Promise<Response> => fetch(`${ESP}areas_search?${searchQuery}`, {method: 'GET', ...ESPToken()}),
+  searchArea: (searchQuery: string): Promise<Response> => fetch(`${ESP}areas_nearby?${searchQuery}`, {method: 'GET', ...ESPToken()}),
 
   areaInfo: (id: string): Promise<Response> => fetch(`${ESP}area?id=${id}${process.env.NODE_ENV !== 'production' ? '&test=current' : ''}`, {method: 'GET', ...ESPToken()}),
 }

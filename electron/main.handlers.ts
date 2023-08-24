@@ -39,7 +39,7 @@ export const registerHandlers = (ipcMain: IpcMain, tray: Tray | null) => {
 
   ipcMain.handle('searchArea', async (event: any, searchQuery: string) => {
     const response = await espAPI.searchArea(searchQuery);
-    if (response.status < 200 || response.status > 299) throw Error("Couldn't search for loadshedding areas");
+    if (response.status < 200 || response.status > 299) throw Error("Couldn't search for loadshedding areas. " + response.statusText);
     const results = await response.json();
     return results?.areas;
   });
