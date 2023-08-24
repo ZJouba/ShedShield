@@ -1,7 +1,7 @@
 {
   "name": "shedshield",
   "author": "Zack Joubert-Roux <zackjouba@gmail.com>",
-  "version": "0.0.1-beta",
+  "version": "0.0.2-beta",
   "description": "An handy little tool to shut down your computer before loadshedding.",
   "main": "./.webpack/main",
   "scripts": {
