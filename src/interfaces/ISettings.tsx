@@ -5,5 +5,6 @@ export default interface ISettings {
   espAreas: IAreaResult[];
   theme: string;
   interval: number;
+  updates: number;
   runAtStartup: boolean;
 }

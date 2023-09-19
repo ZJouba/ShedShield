@@ -21,7 +21,9 @@ interface ISchedule {
 }
 
 export default interface IAreaInfo {
-  events: IEvent[];
-  info: IInfo;
-  schedule: ISchedule;
+  id: string;
+  events: IEvent[] | null;
+  info: IInfo | null;
+  schedule: ISchedule | null;
+  error: string;
 }

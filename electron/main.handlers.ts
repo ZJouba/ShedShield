@@ -6,9 +6,8 @@ import ISettings from '../src/interfaces/ISettings'
 import { CronJob } from 'cron'
 import { shutdown } from './utils/shutdown'
 import logger from './utils/logger'
-import { Dayjs } from 'dayjs'
 
-const store = new Store()
+const store = new Store();
 
 export const registerHandlers = (ipcMain: IpcMain, tray: Tray | null) => {
   let job: CronJob
@@ -29,7 +28,7 @@ export const registerHandlers = (ipcMain: IpcMain, tray: Tray | null) => {
   ipcMain.handle('saveSettings', (event: any, settings: ISettings) => {
     store.set('settings', settings);
     app.setLoginItemSettings({
-      openAtLogin: settings.runAtStartup
+      openAtLogin: settings.runAtStartup,
     });
   });
 

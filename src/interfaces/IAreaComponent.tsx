@@ -1,7 +1,8 @@
 import { Dayjs } from 'dayjs';
+import IAreaInfo from './IAreaInfo';
 
 export default interface IAreaComponent {
-  id: string;
+  areaInfo: IAreaInfo | undefined;
   interval: number;
   handleNextEvent: (date: Dayjs) => void;
 }

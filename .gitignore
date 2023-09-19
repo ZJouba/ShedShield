@@ -6,3 +6,4 @@ out
 yarn-error.log
 .yarn*
 *.log
+.vscode/launch.json

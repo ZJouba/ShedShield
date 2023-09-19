@@ -1,6 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron';
 import ISettings from '../src/interfaces/ISettings';
-import { Dayjs } from 'dayjs';
 
 const api = {
   getSettings: async () => {

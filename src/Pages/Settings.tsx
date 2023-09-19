@@ -31,6 +31,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import ISettingsPage from '../interfaces/ISettingsPage';
 
 const intervals = [15, 10, 5, 2];
+const updates = [30, 60, 120, 300];
+const updateText = ['30 minutes', '1 hour', '2 hours', '3 hours'];
 
 const SettingsPage: FC<ISettingsPage> = ({ themeState, setThemeState }) => {
   useEffect(() => {
@@ -43,6 +45,7 @@ const SettingsPage: FC<ISettingsPage> = ({ themeState, setThemeState }) => {
         const checkedAreas = settings?.espAreas.map(area => area.id);
         setAreas(checkedAreas);
         setInterval(settings?.interval || 15);
+        setUpdate(settings?.updates || 120);
         setRunAtStartup(settings?.runAtStartup);
       })
       .catch((error: Error) => {
@@ -65,6 +68,7 @@ const SettingsPage: FC<ISettingsPage> = ({ themeState, setThemeState }) => {
   const [areasError, setAreasError] = useState("");
 
   const [interval, setInterval] = useState(15);
+  const [update, setUpdate] = useState(120);
 
   const [runAtStartup, setRunAtStartup] = useState(false);
 
@@ -136,6 +140,7 @@ const SettingsPage: FC<ISettingsPage> = ({ themeState, setThemeState }) => {
       espAreas: checkedAreas,
       theme: themeState,
       interval,
+      updates: update,
       runAtStartup,
     } as ISettings)
       .then(() => {
@@ -268,8 +273,8 @@ const SettingsPage: FC<ISettingsPage> = ({ themeState, setThemeState }) => {
                 {areasError && <Alert severity="error">{areasError}</Alert>}
               </Box>
               <Box py={2}>
-                <FormControl>
-                  <InputLabel id="interval-label">Interval</InputLabel>
+                <FormControl sx={{ mr: '5%', width: '45%' }}>
+                  <InputLabel id="interval-label">Duration</InputLabel>
                   <Select
                     labelId="interval-label"
                     value={interval}
@@ -289,7 +294,32 @@ const SettingsPage: FC<ISettingsPage> = ({ themeState, setThemeState }) => {
                       })}
                   </Select>
                   <FormHelperText>
-                    How early should your PC be switched off?
+                    {`How long before loadshedding \n should your PC be switched off?`}
+                  </FormHelperText>
+                </FormControl>
+                <FormControl sx={{ ml: '5%', width: '45%' }}>
+                  <InputLabel id="update-label">Update Interval</InputLabel>
+                  <Select
+                    labelId="update-label"
+                    value={update}
+                    label="Update Interval"
+                    notched
+                    onChange={(event: SelectChangeEvent<number>) => {
+                      setUpdate(+event.target.value);
+                    }}
+                  >
+                    {updates &&
+                      updates.map((item, index) => {
+                        return (
+                          <MenuItem
+                            key={item}
+                            value={item}
+                          >{`${updateText[index]}`}</MenuItem>
+                        );
+                      })}
+                  </Select>
+                  <FormHelperText>
+                    How often should ShedShield check for updates? P.S. This will affect your ESP quota.
                   </FormHelperText>
                 </FormControl>
               </Box>
