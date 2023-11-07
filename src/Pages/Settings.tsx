@@ -29,6 +29,8 @@ import ISearchResult from '../interfaces/ISearchResult';
 import ISettings from '../interfaces/ISettings';
 import { Link, useNavigate } from 'react-router-dom';
 import ISettingsPage from '../interfaces/ISettingsPage';
+import CommandComponent from '../components/CommandComponent';
+import { Command } from "../interfaces/ICommandComponent";
 
 const intervals = [15, 10, 5, 2];
 const updates = [30, 60, 120, 300];
@@ -47,6 +49,7 @@ const SettingsPage: FC<ISettingsPage> = ({ themeState, setThemeState }) => {
         setInterval(settings?.interval || 15);
         setUpdate(settings?.updates || 120);
         setRunAtStartup(settings?.runAtStartup);
+        setCommands(settings?.commands || [])
       })
       .catch((error: Error) => {
         window.Main.error(error);
@@ -60,6 +63,7 @@ const SettingsPage: FC<ISettingsPage> = ({ themeState, setThemeState }) => {
   const [searchResults, setSearchResults] = useState<readonly ISearchResult[]>(
     [],
   );
+  const [commands, setCommands] = useState<Command[]>([]);
 
   const [areaResults, setAreaResults] = useState<readonly IAreaResult[]>([]);
   const [loading, setLoading] = useState(false);
@@ -142,13 +146,14 @@ const SettingsPage: FC<ISettingsPage> = ({ themeState, setThemeState }) => {
       interval,
       updates: update,
       runAtStartup,
+      commands
     } as ISettings)
       .then(() => {
         if (!stepOne) {
           navigate('/');
         } else {
           navigate(0);
-        } ;
+        };
       })
       .catch((error: Error) => {
         window.Main.error(error);
@@ -333,6 +338,7 @@ const SettingsPage: FC<ISettingsPage> = ({ themeState, setThemeState }) => {
                 }
                 label="Launch at startup"
               />
+              <CommandComponent commands={commands} setCommands={setCommands}/>
             </>}
           <Button onClick={saveSettings}>Save Settings</Button>
           <Button onClick={toggleTheme}>Toggle</Button>

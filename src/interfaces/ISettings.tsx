@@ -1,4 +1,5 @@
 import IAreaResult from './IAreaResult';
+import { Command } from './ICommandComponent';
 
 export default interface ISettings {
   apiKey: string;
@@ -7,4 +8,5 @@ export default interface ISettings {
   interval: number;
   updates: number;
   runAtStartup: boolean;
+  commands: Command[];
 }

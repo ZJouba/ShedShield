@@ -58,7 +58,7 @@ app.on('ready', createWindow)
     tray.on('double-click', () => {mainWindow?.show(); mainWindow?.moveTop();});
     registerHandlers(ipcMain, tray);
   })
-  .catch((e: Error) => logger.error(e));
+  .catch((e: Error) => e && logger.error(e));
 
 app.on('window-all-closed', async () => {
   if (process.platform !== 'darwin') {

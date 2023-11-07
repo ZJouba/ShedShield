@@ -4,13 +4,15 @@ import { espAPI } from './api/esp.api'
 import Store from 'electron-store'
 import ISettings from '../src/interfaces/ISettings'
 import { CronJob } from 'cron'
-import { shutdown } from './utils/shutdown'
+import { executeCmd, shutdown } from './utils/shutdown'
 import logger from './utils/logger'
+import dayjs from 'dayjs';
 
 const store = new Store();
 
 export const registerHandlers = (ipcMain: IpcMain, tray: Tray | null) => {
-  let job: CronJob
+  let shutdownJob: CronJob
+  const otherJobs: {name: string, job: CronJob}[] = [];
 
   ipcMain.handle('getSettings', () => {
     const settings: ISettings = store.get('settings') as ISettings || {
@@ -54,11 +56,11 @@ export const registerHandlers = (ipcMain: IpcMain, tray: Tray | null) => {
   });
 
   ipcMain.handle('setCron', async (event: any, cron: Date, formatted: string) => {
-    if (job) {
-      job.stop()
+    if (shutdownJob) {
+      shutdownJob.stop()
     }
     try {
-      job = new CronJob(
+      shutdownJob = new CronJob(
         cron,
         () => {
           shutdown();
@@ -68,8 +70,31 @@ export const registerHandlers = (ipcMain: IpcMain, tray: Tray | null) => {
       );
       tray?.setToolTip(`Shutting down at ${formatted}`);
     } catch (e) {
-      logger.error(e);
+      e && logger.error(e);
     }
+
+    const { commands } = store.get('settings') as ISettings;
+    commands.forEach((command) => {
+      const name = `${command.duration} ${command.unit} before loadshedding run ${command.command}`;
+      const existingJobs = otherJobs?.filter(job => job.name === name) || [];
+      if (existingJobs.length > 0) {
+        existingJobs.forEach((job) => {
+          job.job.stop()
+          otherJobs.splice(otherJobs.indexOf(job));
+        });
+      };
+      otherJobs.push({
+        name,
+        job: new CronJob(
+          dayjs(cron).add(-1 * command.duration, command.unit[0] as dayjs.ManipulateType).toDate(),
+          () => {
+            executeCmd([command.command])
+          },
+          null,
+          true
+        )
+      });
+    })
   });
 
   ipcMain.handle('info', async (event: any, ...args: any[]) => logger.info(args));
