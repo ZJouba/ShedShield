@@ -16,7 +16,7 @@
   "keywords": [],
   "license": "MIT",
   "dependencies": {
-    "@adobe/css-tools": "^4.3.1",
+    "@adobe/css-tools": "^4.3.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.1",
@@ -137,6 +137,6 @@
     }
   },
   "resolutions": {
-    "@adobe/css-tools": "4.3.1"
+    "@adobe/css-tools": "4.3.2"
   }
 }
